@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
+import com.example.rosanabandeira.desafio_1502.R;
 import com.example.rosanabandeira.desafio_1502.model.Customers;
 import com.squareup.picasso.Picasso;
 
@@ -19,23 +20,26 @@ public class CustomerViewModel extends ViewModel {
     public String born = "";
     public String idUser = "";
 
+    public CustomerViewModel() {
+
+    }
+
     public MutableLiveData<ArrayList<CustomerViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
 
     private ArrayList<CustomerViewModel> arrayList;
 
     public String getImageUrl() {
-        return imageView;
+        return "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg";
     }
 
     @BindingAdapter({"bind:imageUrl"})
 
+
     public static void loadImage(ImageView imageView, String imageUrl) {
 
-        Picasso.get().load(imageUrl).into(imageView);
-
-    }
-
-    public CustomerViewModel() {
+        Picasso.get()
+                .load( imageUrl )
+                .into( imageView );
 
     }
 
@@ -52,12 +56,14 @@ public class CustomerViewModel extends ViewModel {
     public MutableLiveData<ArrayList<CustomerViewModel>> getArrayListMutableLiveData() {
 
         arrayList = new ArrayList<>();
-        Customers customers = new Customers(getImageUrl(), "Andre", "Rua Boa Vista", "19/02/89", "123.456.789-00");
-        CustomerViewModel customerViewModel = new CustomerViewModel(customers);
-        arrayList.add(customerViewModel);
 
-        arrayListMutableLiveData.setValue(arrayList);
+        Customers customers = new Customers( getImageUrl(), "Andre", "Rua Boa Vista", "19/02/89", "123.456.789-00" );
 
+        CustomerViewModel customerViewModel = new CustomerViewModel( customers );
+
+        arrayList.add( customerViewModel );
+
+        arrayListMutableLiveData.setValue( arrayList );
 
         return arrayListMutableLiveData;
     }

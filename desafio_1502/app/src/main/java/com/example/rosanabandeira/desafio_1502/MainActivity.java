@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.rosanabandeira.desafio_1502.adapter.CustomAdapter;
+import com.example.rosanabandeira.desafio_1502.model.Customers;
 import com.example.rosanabandeira.desafio_1502.viewmodel.CustomerViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,25 +21,26 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomAdapter customAdapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_main );
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        customerViewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
+        recyclerView = (RecyclerView) findViewById( R.id.recyclerview );
+        customerViewModel = ViewModelProviders.of( this ).get( CustomerViewModel.class );
 
-        customerViewModel.getArrayListMutableLiveData().observe(this, new Observer<ArrayList<CustomerViewModel>>() {
+        customerViewModel.getArrayListMutableLiveData().observe( this, new Observer<ArrayList<CustomerViewModel>>() {
             @Override
             public void onChanged(@Nullable ArrayList<CustomerViewModel> customerViewModels) {
 
-                customAdapter = new CustomAdapter(MainActivity.this, customerViewModels);
-                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                recyclerView.setAdapter(customAdapter);
+                customAdapter = new CustomAdapter( MainActivity.this, customerViewModels );
+                recyclerView.setLayoutManager( new LinearLayoutManager( MainActivity.this ) );
+                recyclerView.setAdapter( customAdapter );
+
 
             }
-        });
-
+        } );
 
     }
 

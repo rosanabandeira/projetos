@@ -31,18 +31,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         if (layoutInflater == null) {
 
-            layoutInflater = LayoutInflater.from(parent.getContext());
+            layoutInflater = LayoutInflater.from( parent.getContext() );
         }
 
-        CustomerBinding customerBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_recycler, parent, false);
+        CustomerBinding customerBinding = DataBindingUtil.inflate( layoutInflater, R.layout.item_recycler, parent, false );
 
-        return new CustomView(customerBinding);
+        return new CustomView( customerBinding );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomView customView, int position) {
+    public void onBindViewHolder(@NonNull CustomView holder, int position) {
 
-        CustomerViewModel customerViewModel = arrayList.get(position);
+        CustomerViewModel customerViewModel = arrayList.get( position );
+        holder.bind( customerViewModel );
     }
 
     @Override
@@ -54,17 +55,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         private CustomerBinding customerBinding;
 
-
         public CustomView(CustomerBinding customerBinding) {
 
-            super(customerBinding.getRoot());
+            super( customerBinding.getRoot() );
 
             this.customerBinding = customerBinding;
         }
 
         public void bind(CustomerViewModel customerViewModel) {
-            this.customerBinding.setCustomerModel(customerViewModel);
-            customerBinding.executePendingBingings();
+            this.customerBinding.setCustomermodel( customerViewModel );
+
 
         }
 

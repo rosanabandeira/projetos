@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <data class="CustomerBinding">
 
@@ -17,37 +19,43 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:background="@color/colorPrimary">
 
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingStart="8dp"
-                android:paddingLeft="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/user"/>
+
 
             <TextView
                 android:id="@+id/fullName"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:hint="Nome Completo"
                 android:text="@{customermodel.fullName}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="122dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"/>
 
 
             <TextView
@@ -58,8 +66,12 @@
                 android:text="@{customermodel.address}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="152dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/born"
@@ -69,9 +81,12 @@
                 android:text="@{customermodel.born}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="186dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/idUser"
@@ -81,23 +96,15 @@
                 android:text="@{customermodel.idUser}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="157dp"
-                tools:layout_editor_absoluteY="220dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp" />
 
-            <TextView
-                android:id="@+id/details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                android:text="Details"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="164dp"
-                tools:layout_editor_absoluteY="278dp" />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
 
     </android.support.v7.widget.CardView>
