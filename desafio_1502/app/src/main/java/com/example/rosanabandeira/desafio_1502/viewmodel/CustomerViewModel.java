@@ -33,12 +33,11 @@ public class CustomerViewModel extends ViewModel {
     }
 
     @BindingAdapter({"bind:imageUrl"})
-
-
     public static void loadImage(ImageView imageView, String imageUrl) {
 
         Picasso.get()
-                .load( imageUrl )
+                .load( "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg" )
+                .placeholder( R.drawable.user )
                 .into( imageView );
 
     }
@@ -51,6 +50,7 @@ public class CustomerViewModel extends ViewModel {
         this.born = customers.born;
         this.idUser = customers.idUser;
 
+
     }
 
     public MutableLiveData<ArrayList<CustomerViewModel>> getArrayListMutableLiveData() {
@@ -58,13 +58,23 @@ public class CustomerViewModel extends ViewModel {
         arrayList = new ArrayList<>();
 
         Customers customers = new Customers( getImageUrl(), "Andre", "Rua Boa Vista", "19/02/89", "123.456.789-00" );
-
         CustomerViewModel customerViewModel = new CustomerViewModel( customers );
-
+        customers.setImageView( "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg" );
         arrayList.add( customerViewModel );
 
-        arrayListMutableLiveData.setValue( arrayList );
+        Customers customers1 = new Customers( getImageUrl(), "Coringa", "Inferno", "666666", "xxxxx" );
+        CustomerViewModel customerViewModel1 = new CustomerViewModel( customers1 );
+        customers.setImageView( "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg" );
+        arrayList.add( customerViewModel1 );
 
+
+        arrayListMutableLiveData.setValue( arrayList );
         return arrayListMutableLiveData;
+
+
+    }
+
+    public void loadImage() {
+
     }
 }

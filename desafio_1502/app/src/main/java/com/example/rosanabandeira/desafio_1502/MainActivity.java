@@ -38,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager( new LinearLayoutManager( MainActivity.this ) );
                 recyclerView.setAdapter( customAdapter );
 
-
             }
         } );
+
+        customerViewModel.loadImage(  );
 
     }
 
