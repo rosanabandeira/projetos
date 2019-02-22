@@ -7,7 +7,7 @@ public class Customers {
     public String address = "";
     public String born = "";
     public String idUser = "";
-
+    public Address addressResponse;
 
     public Customers() {
     }

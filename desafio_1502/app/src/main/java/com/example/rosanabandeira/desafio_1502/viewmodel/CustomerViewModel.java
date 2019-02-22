@@ -4,13 +4,22 @@ package com.example.rosanabandeira.desafio_1502.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.BindingAdapter;
+import android.databinding.ObservableField;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.rosanabandeira.desafio_1502.R;
+import com.example.rosanabandeira.desafio_1502.data.remote.APIService;
+import com.example.rosanabandeira.desafio_1502.data.remote.RetrofitService;
+import com.example.rosanabandeira.desafio_1502.model.AddressResponse;
 import com.example.rosanabandeira.desafio_1502.model.Customers;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class CustomerViewModel extends ViewModel {
 
@@ -19,8 +28,28 @@ public class CustomerViewModel extends ViewModel {
     public String address = "";
     public String born = "";
     public String idUser = "";
+    public Customers customers;
+
+    public ObservableField<String> obsCep;
+    public ObservableField<String> obsRua;
+    public ObservableField<String> obsNumero;
+    public ObservableField<String> obsComplemento;
+    public ObservableField<String> obsUF;
+    public ObservableField<String> obsBairro;
+    public ObservableField<String> obsCidade;
+
 
     public CustomerViewModel() {
+        this.customers = new Customers();
+
+        this.obsCep = new ObservableField<>();
+        this.obsRua = new ObservableField<>();
+        this.obsNumero = new ObservableField<>();
+        this.obsComplemento = new ObservableField<>();
+        this.obsUF = new ObservableField<>();
+        this.obsBairro = new ObservableField<>();
+        this.obsCidade = new ObservableField<>();
+
 
     }
 
@@ -44,12 +73,13 @@ public class CustomerViewModel extends ViewModel {
 
     public CustomerViewModel(Customers customers) {
 
+        this();
+
         this.imageView = customers.imageView;
         this.fullName = customers.fullName;
         this.address = customers.address;
         this.born = customers.born;
         this.idUser = customers.idUser;
-
 
     }
 
@@ -77,4 +107,38 @@ public class CustomerViewModel extends ViewModel {
     public void loadImage() {
 
     }
+
+    public void searchCep() {
+
+        APIService retrofit = RetrofitService.getApiService();
+
+        Observable<AddressResponse> observable = retrofit.getRemoteAddress(obsCep.get());
+
+
+        observable.subscribeOn( Schedulers.newThread() ).subscribe( new io.reactivex.Observer<AddressResponse>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(AddressResponse addressResponse) {
+                Log.i( "entrou", "onNext: " + addressResponse.getBairro() );
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+                Log.i( "entrou", "onError: " + e.getMessage() );
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        } );
+    }
+
+
 }

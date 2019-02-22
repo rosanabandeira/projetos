@@ -7,6 +7,6 @@ import io.reactivex.Observable;
 public class AdressRemoteRepository {
 
     public Observable<AddressResponse> getRemoteAddress() {
-        return RetrofitService.getApiService().getRemoteAddress();
+        return (Observable<AddressResponse>) RetrofitService.getApiService().getRemoteAddress();
     }
 }

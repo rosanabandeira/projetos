@@ -9,6 +9,16 @@ public class Address {
     private String uf;
     private String complemento;
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    private String numero;
+
     public String getBairro() {
         return bairro;
     }

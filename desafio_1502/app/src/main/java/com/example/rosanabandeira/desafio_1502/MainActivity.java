@@ -7,19 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.rosanabandeira.desafio_1502.adapter.CustomAdapter;
-import com.example.rosanabandeira.desafio_1502.data.remote.APIService;
-import com.example.rosanabandeira.desafio_1502.data.remote.RetrofitService;
-import com.example.rosanabandeira.desafio_1502.model.AddressResponse;
 import com.example.rosanabandeira.desafio_1502.viewmodel.CustomerViewModel;
 
 import java.util.ArrayList;
-
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,35 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         customerViewModel.loadImage();
 
-        APIService retrofit = RetrofitService.getApiService();
-
-        Observable<AddressResponse> observable = retrofit.getRemoteAddress();
-
-
-        observable.subscribeOn( Schedulers.newThread() ).subscribe( new io.reactivex.Observer<AddressResponse>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(AddressResponse addressResponse) {
-                Log.i( "entrou", "onNext: " + addressResponse.getBairro() );
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-                Log.i( "entrou", "onError: " + e.getMessage() );
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        } );
     }
-
 
 }
