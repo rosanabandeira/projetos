@@ -10,20 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.rosanabandeira.desafio_1502.adapter.CustomAdapter;
+import com.example.rosanabandeira.desafio_1502.data.remote.APIService;
+import com.example.rosanabandeira.desafio_1502.data.remote.RetrofitService;
 import com.example.rosanabandeira.desafio_1502.model.AddressResponse;
-import com.example.rosanabandeira.desafio_1502.model.Customers;
-import com.example.rosanabandeira.desafio_1502.remote.APIService;
-import com.example.rosanabandeira.desafio_1502.remote.RetrofitService;
 import com.example.rosanabandeira.desafio_1502.viewmodel.CustomerViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(Throwable e) {
 
-                Log.i( "entrou", "onError: " + e.getMessage());
+                Log.i( "entrou", "onError: " + e.getMessage() );
 
             }
 

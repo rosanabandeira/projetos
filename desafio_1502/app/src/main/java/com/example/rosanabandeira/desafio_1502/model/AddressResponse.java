@@ -4,6 +4,7 @@ package com.example.rosanabandeira.desafio_1502.model;
 
 import android.location.Address;
 
+import com.example.rosanabandeira.desafio_1502.AddressActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,9 +13,10 @@ import java.util.List;
 public class AddressResponse {
 
     @SerializedName("address")
+
     private List<Address> newListAdress;
 
-    public AddressResponse() {
+    public AddressResponse(AddressActivity context) {
 
     }
 
@@ -119,4 +121,6 @@ public class AddressResponse {
         this.unidade = unidade;
     }
 
+    public void execute() {
+    }
 }
