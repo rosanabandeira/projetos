@@ -112,7 +112,7 @@ public class CustomerViewModel extends ViewModel {
 
         APIService retrofit = RetrofitService.getApiService();
 
-        Observable<AddressResponse> observable = retrofit.getRemoteAddress( obsCep.get() );
+        final Observable<AddressResponse> observable = retrofit.getRemoteAddress( obsCep.get() );
 
 
         observable.subscribeOn( Schedulers.newThread() ).subscribe( new io.reactivex.Observer<AddressResponse>() {
@@ -124,6 +124,7 @@ public class CustomerViewModel extends ViewModel {
             @Override
             public void onNext(AddressResponse addressResponse) {
                 Log.i( "entrou", "onNext: " + addressResponse.getBairro() );
+                obsBairro.set( addressResponse.getBairro() );
             }
 
             @Override
@@ -138,6 +139,10 @@ public class CustomerViewModel extends ViewModel {
 
             }
         } );
+    }
+
+    public void afterCepTextChanged (CharSequence charSequence){
+        obsCep.set( charSequence.toString() );
     }
 
 

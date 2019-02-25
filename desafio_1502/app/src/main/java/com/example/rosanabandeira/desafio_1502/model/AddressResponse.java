@@ -4,7 +4,6 @@ package com.example.rosanabandeira.desafio_1502.model;
 
 import android.location.Address;
 
-import com.example.rosanabandeira.desafio_1502.AddressActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,9 +15,9 @@ public class AddressResponse {
 
     private List<Address> newListAdress;
 
-    public AddressResponse(AddressActivity context) {
+    //public AddressResponse(AddressActivity context) {
 
-    }
+    //}
 
     @SerializedName("bairro")
     @Expose

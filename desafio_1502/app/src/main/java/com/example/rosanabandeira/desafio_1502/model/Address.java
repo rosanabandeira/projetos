@@ -1,8 +1,6 @@
 package com.example.rosanabandeira.desafio_1502.model;
 
-import com.example.rosanabandeira.desafio_1502.viewmodel.CustomerViewModel;
-
-public class Address extends CustomerViewModel {
+public class Address {
 
     private String bairro;
     private String cep;
@@ -10,6 +8,8 @@ public class Address extends CustomerViewModel {
     private String localidade;
     private String uf;
     private String complemento;
+    private String numero;
+
 
     public String getNumero() {
         return numero;
@@ -18,8 +18,6 @@ public class Address extends CustomerViewModel {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
-    private String numero;
 
     public String getBairro() {
         return bairro;

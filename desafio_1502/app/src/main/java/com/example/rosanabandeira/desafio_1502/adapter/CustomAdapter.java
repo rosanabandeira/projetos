@@ -33,6 +33,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         if (layoutInflater == null) {
 
             layoutInflater = LayoutInflater.from( parent.getContext() );
+
         }
 
         CustomerBinding customerBinding = DataBindingUtil.inflate( layoutInflater, R.layout.item_recycler, parent, false );
@@ -65,8 +66,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         public void bind(CustomerViewModel customerViewModel) {
             this.customerBinding.setCustomermodel( customerViewModel );
-
-
         }
 
         public CustomerBinding getCustomerBinding() {
