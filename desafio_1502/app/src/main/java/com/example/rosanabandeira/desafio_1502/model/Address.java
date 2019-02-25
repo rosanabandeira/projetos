@@ -1,6 +1,8 @@
 package com.example.rosanabandeira.desafio_1502.model;
 
-public class Address {
+import com.example.rosanabandeira.desafio_1502.viewmodel.CustomerViewModel;
+
+public class Address extends CustomerViewModel {
 
     private String bairro;
     private String cep;

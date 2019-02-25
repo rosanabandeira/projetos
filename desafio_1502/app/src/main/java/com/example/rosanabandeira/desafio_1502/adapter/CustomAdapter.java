@@ -20,6 +20,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private Context context;
     private LayoutInflater layoutInflater;
 
+
     public CustomAdapter(Context context, ArrayList<CustomerViewModel> arrayList) {
         this.context = context;
         this.arrayList = arrayList;

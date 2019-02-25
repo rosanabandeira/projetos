@@ -112,7 +112,7 @@ public class CustomerViewModel extends ViewModel {
 
         APIService retrofit = RetrofitService.getApiService();
 
-        Observable<AddressResponse> observable = retrofit.getRemoteAddress(obsCep.get());
+        Observable<AddressResponse> observable = retrofit.getRemoteAddress( obsCep.get() );
 
 
         observable.subscribeOn( Schedulers.newThread() ).subscribe( new io.reactivex.Observer<AddressResponse>() {
