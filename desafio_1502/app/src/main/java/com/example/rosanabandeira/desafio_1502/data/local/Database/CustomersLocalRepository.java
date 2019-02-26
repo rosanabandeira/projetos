@@ -12,16 +12,16 @@ import io.reactivex.Flowable;
 public class CustomersLocalRepository {
 
     // Pega os dados da base de dados
-    public Flowable<List<Customers>> customers(Context context) {
-        DatabaseRoom room = DatabaseRoom.getDatabase( context );
+    public Flowable<List<Customers>> getLocalResults(Context context) {
+        DatabaseRoom room = DatabaseRoom.getDatabase(context);
         CustomersDao customersDao = room.customersDao();
         return customersDao.getAll();
     }
 
     // Insere uma lista reults na base de dados
     public void insertItems(Context context, List<Customers> items) {
-        DatabaseRoom room = DatabaseRoom.getDatabase( context );
-        CustomersDao customersDao = room.customersDao();
-        customersDao.insert( items );
+        DatabaseRoom room = DatabaseRoom.getDatabase(context);
+        CustomersDao resultsDao = room.customersDao();
+        resultsDao.insert(items);
     }
 }

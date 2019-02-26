@@ -1,6 +1,7 @@
 package com.example.rosanabandeira.desafio_1502.model;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
@@ -18,26 +19,35 @@ public class Customers {
     @ColumnInfo(name = "Nome Completo")
     public String fullName = "";
 
-    @ColumnInfo(name = "Endereço")
-    public String address = "";
-
     @ColumnInfo(name = "Data de Nascimento")
     public String born = "";
 
     @ColumnInfo(name = "CPF")
     public String idUser = "";
 
+    @Embedded
+    public Address address;
 
-    public Customers() {
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public Customers(String imageView, String fullName, String address, String born, String idUser) {
+    public Address getAddress() {
+        return address;
+    }
+
+    public Customers() {
+        this.address = new Address();
+
+    }
+
+
+    public Customers(String imageView, String fullName, String born, String idUser) {
+        this();
         this.imageView = imageView;
         this.fullName = fullName;
-        this.address = address;
         this.born = born;
         this.idUser = idUser;
-
 
     }
 
@@ -55,14 +65,6 @@ public class Customers {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getBorn() {

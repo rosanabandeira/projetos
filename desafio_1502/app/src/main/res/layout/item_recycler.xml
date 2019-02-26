@@ -46,7 +46,7 @@
                     app:imageUrl="@{customermodel.imageUrl}" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/fullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,8 +56,9 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
+                    android:afterTextChanged="@{(editable)-> customermodel.afterFullNameTextChanged(editable)}"
                     android:hint="Nome Completo"
-                    android:text="@{customermodel.fullName}"
+                    android:text="@{customermodel.obsFullName}"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
@@ -184,15 +185,8 @@
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/buttonSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="30dp"
-                    app:srcCompat="@drawable/ic_save_black_24dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/born"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,12 +196,13 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
+                    android:afterTextChanged="@{(editable)-> customermodel.afterBornTextChanged(editable)}"
                     android:hint="Data de Nascimento"
-                    android:text="@{customermodel.born}"
+                    android:text="@{customermodel.obsBorn}"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/idUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -217,10 +212,21 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
+                    android:afterTextChanged="@{(editable)-> customermodel.afterCpfTextChanged(editable)}"
                     android:hint="CPF"
-                    android:text="@{customermodel.idUser}"
+                    android:numeric="integer"
+                    android:text="@{customermodel.obsCPF}"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/buttonSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="@{()-> customermodel.saveCustomer()}"
+                    android:padding="30dp"
+                    app:srcCompat="@drawable/ic_save_black_24dp" />
 
             </LinearLayout>
 

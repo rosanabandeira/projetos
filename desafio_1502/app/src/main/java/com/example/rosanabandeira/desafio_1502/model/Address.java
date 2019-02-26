@@ -1,14 +1,25 @@
 package com.example.rosanabandeira.desafio_1502.model;
 
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+
+@Entity(tableName = "customer")
 public class Address {
 
+    @ColumnInfo(name = "bairro")
     private String bairro;
+    @ColumnInfo(name = "cep")
     private String cep;
+    @ColumnInfo(name = "logradouro")
     private String logradouro;
+    @ColumnInfo(name = "localidade")
     private String localidade;
+    @ColumnInfo(name = "uf")
     private String uf;
+    @ColumnInfo(name = "complemento")
     private String complemento;
+    @ColumnInfo(name = "numero")
     private String numero;
 
 

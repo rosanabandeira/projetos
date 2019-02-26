@@ -22,7 +22,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (DatabaseRoom.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                    INSTANCE = Room.databaseBuilder(context,
                             DatabaseRoom.class, "sqlite_room_db")
                             .build();
                 }
