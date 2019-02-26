@@ -50,7 +50,6 @@ public class CustomerViewModel extends ViewModel {
         this.obsBairro = new ObservableField<>();
         this.obsCidade = new ObservableField<>();
 
-
     }
 
     public MutableLiveData<ArrayList<CustomerViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
@@ -125,6 +124,9 @@ public class CustomerViewModel extends ViewModel {
             public void onNext(AddressResponse addressResponse) {
                 Log.i( "entrou", "onNext: " + addressResponse.getBairro() );
                 obsBairro.set( addressResponse.getBairro() );
+                obsRua.set( addressResponse.getLogradouro() );
+                obsCidade.set( addressResponse.getLocalidade() );
+                obsUF.set( addressResponse.getUnidade() );
             }
 
             @Override
@@ -141,7 +143,7 @@ public class CustomerViewModel extends ViewModel {
         } );
     }
 
-    public void afterCepTextChanged (CharSequence charSequence){
+    public void afterCepTextChanged(CharSequence charSequence) {
         obsCep.set( charSequence.toString() );
     }
 

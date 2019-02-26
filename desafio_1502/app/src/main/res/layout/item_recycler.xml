@@ -87,8 +87,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
-                        android:hint="CEP"
                         android:afterTextChanged="@{(editable)-> customermodel.afterCepTextChanged(editable)}"
+                        android:hint="CEP"
                         android:text="@{customermodel.obsCep}" />
 
                     <ImageButton

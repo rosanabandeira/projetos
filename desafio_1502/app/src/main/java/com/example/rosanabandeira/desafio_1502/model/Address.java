@@ -1,5 +1,6 @@
 package com.example.rosanabandeira.desafio_1502.model;
 
+
 public class Address {
 
     private String bairro;

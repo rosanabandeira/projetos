@@ -15,10 +15,6 @@ public class AddressResponse {
 
     private List<Address> newListAdress;
 
-    //public AddressResponse(AddressActivity context) {
-
-    //}
-
     @SerializedName("bairro")
     @Expose
     private String bairro;
