@@ -31,6 +31,9 @@ public interface CustomersDao {
     @Query("Select * from customer limit 30")
     Flowable<List<Customers>> getAll();
 
+    @Query("Select * from customer limit 30")
+    List<Customers> get();
+
 }
 
 

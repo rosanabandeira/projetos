@@ -20,9 +20,12 @@ import com.example.rosanabandeira.desafio_1502.model.Customers;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class CustomerViewModel extends ViewModel {
@@ -33,15 +36,9 @@ public class CustomerViewModel extends ViewModel {
     public String born = "";
     public String idUser = "";
 
-    public Customers customers;
+    private List<Customers> customersList;
 
-    public String cep = "";
-    public String rua = "";
-    public String numero = "";
-    public String complemento = "";
-    public String bairro = "";
-    public String uf = "";
-    public String cidade = "";
+    public Customers customers;
 
     public ObservableField<String> obsCep;
     public ObservableField<String> obsRua;
@@ -53,6 +50,7 @@ public class CustomerViewModel extends ViewModel {
     public ObservableField<String> obsFullName;
     public ObservableField<String> obsCPF;
     public ObservableField<String> obsBorn;
+    public ObservableField<String> obsId;
 
     public CustomersDao customersDao;
 
@@ -79,6 +77,7 @@ public class CustomerViewModel extends ViewModel {
         this.obsFullName = new ObservableField<>();
         this.obsCPF = new ObservableField<>();
         this.obsBorn = new ObservableField<>();
+        this.obsId = new ObservableField<>();
 
 
     }
@@ -105,11 +104,20 @@ public class CustomerViewModel extends ViewModel {
 
         this();
 
-        this.imageView = customers.imageView;
-        this.fullName = customers.fullName;
-        this.born = customers.born;
-        this.idUser = customers.idUser;
+        obsFullName.set( customers.getFullName() );
+        obsCPF.set( customers.getIdUser() );
+        obsBorn.set( customers.getBorn() );
+        obsId.set( String.valueOf( customers.getId() ) );
 
+        if (customers.getAddress() != null) {
+            obsCep.set( customers.getAddress().getCep() );
+            obsRua.set( customers.getAddress().getLogradouro() );
+            obsNumero.set( customers.getAddress().getNumero() );
+            obsComplemento.set( customers.getAddress().getComplemento() );
+            obsBairro.set( customers.getAddress().getBairro() );
+            obsCidade.set( customers.getAddress().getLocalidade() );
+            obsUF.set( customers.getAddress().getUf() );
+        }
     }
 
     public void init(Context context) {
@@ -121,17 +129,29 @@ public class CustomerViewModel extends ViewModel {
 
 
         arrayList = new ArrayList<>();
+        DatabaseRoom room = DatabaseRoom.getDatabase( context );
+        customersDao = room.customersDao();
+
+        getSimples();
+        for (Customers c : customersList) {
+
+            CustomerViewModel customerViewModel1 = new CustomerViewModel( c );
+            customerViewModel1.init( context );
+            customers.setImageView( "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg" );
+            arrayList.add( customerViewModel1 );
+
+        }
 
         /*Customers customers = new Customers( getImageUrl(), "Andre", "19/02/89", "123.456.789-00" );
         CustomerViewModel customerViewModel = new CustomerViewModel( customers );
         customers.setImageView( "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg" );
         arrayList.add( customerViewModel );*/
 
-        Customers customers1 = new Customers( getImageUrl(), "Coringa", "666666", "xxxxx" );
+       /* Customers customers1 = new Customers( getImageUrl(), "Coringa", "666666", "xxxxx" );
         CustomerViewModel customerViewModel1 = new CustomerViewModel( customers1 );
         customerViewModel1.init( context );
         customers.setImageView( "https://www.urbanarts.com.br/imagens/produtos/067980/0/Ampliada/coringa-classico.jpg" );
-        arrayList.add( customerViewModel1 );
+        arrayList.add( customerViewModel1 );*/
 
 
         arrayListMutableLiveData.setValue( arrayList );
@@ -140,6 +160,35 @@ public class CustomerViewModel extends ViewModel {
 
 
     }
+
+    private void getSimples() {
+        Thread t = new Thread( new Runnable() {
+            @Override
+            public void run() {
+                customersList = customersDao.get();
+            }
+        } );
+        t.start();
+
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getAll() {
+        Flowable<List<Customers>> dadosSalvos = customersDao.getAll();
+        dadosSalvos.subscribeOn( Schedulers.single() )
+                .subscribe( new Consumer<List<Customers>>() {
+                                @Override
+                                public void accept(List<Customers> customers) throws Exception {
+                                    customersList = customers;
+                                }
+                            }
+                );
+    }
+
 
     public void loadImage() {
 
@@ -200,8 +249,9 @@ public class CustomerViewModel extends ViewModel {
         customers.setAddress( address );
 
         customers.setFullName( obsFullName.get() );
-        customers.setBorn( obsFullName.get() );
+        customers.setBorn( obsBorn.get() );
         customers.setIdUser( obsCPF.get() );
+        customers.setId( Long.valueOf( obsId.get() ) );
 
         DatabaseRoom room = DatabaseRoom.getDatabase( context );
         customersDao = room.customersDao();
@@ -209,7 +259,10 @@ public class CustomerViewModel extends ViewModel {
         Thread thread = new Thread( new Runnable() {
             @Override
             public void run() {
-                customersDao.insert( customers );
+                if (customers.getId() == 0)
+                    customersDao.insert( customers );
+                else
+                    customersDao.update( customers );
             }
         } );
 
@@ -228,6 +281,23 @@ public class CustomerViewModel extends ViewModel {
 
     public void afterBornTextChanged(CharSequence charSequence) {
         obsBorn.set( charSequence.toString() );
+    }
+
+
+    public void afterNumberTextChanged(CharSequence charSequence) {
+        obsNumero.set( charSequence.toString() );
+    }
+
+    public void afterComplementoTextChanged(CharSequence charSequence) {
+        obsComplemento.set( charSequence.toString() );
+    }
+
+    public void afterCidadeTextChanged(CharSequence charSequence) {
+        obsCidade.set( charSequence.toString() );
+    }
+
+    public void afterUfTextChanged(CharSequence charSequence) {
+        obsUF.set( charSequence.toString() );
     }
 
 

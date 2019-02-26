@@ -31,6 +31,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <EditText
+                    android:id="@+id/idSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{customermodel.obsId}"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -128,6 +136,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
+                        android:afterTextChanged="@{(editable)-> customermodel.afterNumberTextChanged(editable)}"
                         android:hint="Número"
                         android:text="@{customermodel.obsNumero}" />
 
@@ -136,6 +145,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
+                        android:afterTextChanged="@{(editable)-> customermodel.afterComplementoTextChanged(editable)}"
                         android:hint="Complemento"
                         android:text="@{customermodel.obsComplemento}" />
 
@@ -173,6 +183,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:afterTextChanged="@{(editable)-> customermodel.afterUfTextChanged(editable)}"
                         android:hint="UF"
                         android:text="@{customermodel.obsUF}" />
 
@@ -181,6 +192,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
+                        android:afterTextChanged="@{(editable)-> customermodel.afterCidadeTextChanged(editable)}"
                         android:hint="Estado" />
 
                 </LinearLayout>

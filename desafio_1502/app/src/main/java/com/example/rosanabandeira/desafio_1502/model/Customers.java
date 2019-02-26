@@ -38,6 +38,7 @@ public class Customers {
 
     public Customers() {
         this.address = new Address();
+        this.setId( 0 );
 
     }
 

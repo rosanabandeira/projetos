@@ -1,6 +1,7 @@
 package com.example.rosanabandeira.desafio_1502;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private ImageView imageViewDelete;
     private List<Customers> customersList = new ArrayList<>();
+    private MutableLiveData<ArrayList<CustomerViewModel>> data;
 
 
     @SuppressLint("WrongViewCast")
