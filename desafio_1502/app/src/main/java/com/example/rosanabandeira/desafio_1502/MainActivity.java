@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar( toolbar );
 
         recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
+
         customerViewModel = ViewModelProviders.of( this ).get( CustomerViewModel.class );
         customerViewModel.init( this );
 
@@ -67,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
         customerViewModel.loadImage();
 
+        fab.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        } );
+
     }
+
 
 }

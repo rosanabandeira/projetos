@@ -36,9 +36,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         }
 
-        CustomerBinding customerBinding = DataBindingUtil.inflate( layoutInflater, R.layout.item_recycler, parent, false );
+     //   CustomerBinding customerBinding = DataBindingUtil.inflate( layoutInflater, R.layout.item_recycler, parent, false );
 
-        return new CustomView( customerBinding );
+       // return new CustomView( customerBinding );
+
+        return null;
     }
 
     @Override
